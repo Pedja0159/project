@@ -15,7 +15,7 @@ struct Headline {
     var title : String
     var text : String
     var image : String
-    
+    var color: UIColor
 }
 
 
@@ -23,19 +23,13 @@ struct Headline {
 
 class StoriesTableViewController: UITableViewController {
    
-   // var colors = ["red","orange","brown"]
-
-    var colors = [Color(name: "red", uIColor: UIColor.red),
-    Color(name: "orange", uIColor: UIColor.orange),
-        Color(name: "brown", uIColor: UIColor.brown)
-    
-    ]
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.isEditing = true
         
+        let nib = UINib(nibName: "HeadlineTableViewCell", bundle: nil)
         
+        tableView.register(nib, forCellReuseIdentifier: "HeadlineCell")
     }
     
     override func didReceiveMemoryWarning() {
@@ -57,9 +51,9 @@ class StoriesTableViewController: UITableViewController {
     }
 
     var headlines = [
-        Headline(id: 1, title: "Lorem Ipsum", text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.", image: "Apple"),
-        Headline(id: 2, title: "Aenean condimentum", text: "Ut eget massa erat. Morbi mauris diam, vulputate at luctus non.", image: "Banana"),
-        Headline(id: 3, title: "In ac ante sapien", text: "Aliquam egestas ultricies dapibus. Nam molestie nunc.", image: "Cantaloupe"),
+        Headline(id: 1, title: "Lorem Ipsum", text: "uistackview two labels.", image: "Apple", color: .red),
+        Headline(id: 2, title: "Aenean condimentum", text: "Ut eget massa erat. Morbi mauris diam, vulputate at luctus non.", image: "Banana", color: .orange),
+        Headline(id: 3, title: "In ac ante sapien", text: "Aliquam egestas ultricies dapibus. Nam molestie nunc.", image: "Cantaloupe", color: .brown)
     ]
     // MARK: - Table view data source
 
@@ -71,21 +65,30 @@ class StoriesTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return headlines.count
-        return colors.count
+    
     }
     
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "LabelCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "HeadlineCell", for: indexPath) as! HeadlineTableViewCell
         
-        let headline = headlines[indexPath.row]
-        cell.textLabel?.text = headline.title
-        cell.detailTextLabel?.text = headline.text
-        cell.imageView?.image = UIImage(named: headline.image)
-        cell.backgroundColor = colors[indexPath.row].uIColor
+         cell.headline = headlines[indexPath.row]
         return cell
     }
     
-    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 40
+       
 
+        }
+
+    override func viewWillAppear(_ animated: Bool) {
+        tableView.estimatedRowHeight = 400
+        tableView.rowHeight = UITableView.automaticDimension
+    }
+    
 }
+
+
+
+
