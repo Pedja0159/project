@@ -76,19 +76,24 @@ class StoriesTableViewController: UITableViewController {
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 40
-       
-
-        }
-
-    override func viewWillAppear(_ animated: Bool) {
-        tableView.estimatedRowHeight = 400
-        tableView.rowHeight = UITableView.automaticDimension
+   
+    override func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 300
     }
     
-}
-
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 40
+    
+      
+        
+    }
+  
+    
+    
+        
+    }
+    
 
 
 

@@ -14,7 +14,7 @@ class HeadlineTableViewCell: UITableViewCell {
         didSet{
             
             guard let _headline = headline else {return}
-            headlineTitleLabel.text = _headline.title
+            headlineTitlelabel.text = _headline.title
             detailTextLabel?.text = _headline.text
             headlineImageView.image = UIImage(named: _headline.image)
             backgroundColor = _headline.color
@@ -25,10 +25,8 @@ class HeadlineTableViewCell: UITableViewCell {
         
     }
     
+    @IBOutlet var headlineTitlelabel: UILabel!
     
-    @IBOutlet var headlineTitle2: UILabel!
-    
-    @IBOutlet var headlineTitleLabel: UILabel!
     @IBOutlet var headlineImageView: UIImageView!
     
     override func awakeFromNib() {
